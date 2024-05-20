@@ -6,6 +6,7 @@ import lm_eval.base
 
 from . import superglue
 from . import glue
+from . import lex_glue
 from . import arc
 from . import coqa
 from . import race
@@ -103,6 +104,8 @@ TASK_REGISTRY = {
     # "stsb": glue.STSB, # not implemented yet
     "sst": glue.SST,
     "wnli": glue.WNLI,
+    # LexGLUE
+    "case_hold": lex_glue.CaseHold,
     # SuperGLUE
     "boolq": superglue.BoolQ,
     "cb": superglue.CommitmentBank,
