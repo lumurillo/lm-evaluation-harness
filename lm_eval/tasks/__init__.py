@@ -106,6 +106,7 @@ TASK_REGISTRY = {
     "wnli": glue.WNLI,
     # LexGLUE
     "case_hold": lex_glue.CaseHold,
+    "scotus": lex_glue.SCOTUS,
     # SuperGLUE
     "boolq": superglue.BoolQ,
     "cb": superglue.CommitmentBank,
