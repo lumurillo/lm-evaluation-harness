@@ -38,7 +38,7 @@ class CaseHold(Task):
         return True
 
     def has_test_docs(self):
-        return False
+        return True
 
     def training_docs(self):
         if self._training_docs is None:
