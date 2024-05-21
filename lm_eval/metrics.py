@@ -45,6 +45,20 @@ def f1_score(items):
     return np.max(fscore)
 
 
+def f1_micro(items):
+    unzipped_list = list(zip(*items))
+    golds = unzipped_list[0]
+    preds = unzipped_list[1]
+    return sklearn.metrics.f1_score(golds, preds, average='micro')
+
+
+def f1_macro(items):
+    unzipped_list = list(zip(*items))
+    golds = unzipped_list[0]
+    preds = unzipped_list[1]
+    return sklearn.metrics.f1_score(golds, preds, average='macro')
+
+
 def acc_all(items):
     # Only count as correct if all answers are labeled correctly for each question
     question_scoring_dict = {}

@@ -1,6 +1,6 @@
 import numpy as np
 from lm_eval.base import rf, Task
-from lm_eval.metrics import mean, matthews_corrcoef, f1_score, yesno
+from lm_eval.metrics import mean, f1_micro, f1_macro
 from lm_eval.utils import general_detokenize
 
 
@@ -61,7 +61,6 @@ class CaseHold(Task):
         return " {}".format({0: "0", 1: "1", 2: "2", 3: "3", 4: "4"}[doc["label"]])
 
     def construct_requests(self, doc, ctx):
-        print(f"ctx: {ctx}")
         ll_0, _ = rf.loglikelihood(ctx, " 0")
         ll_1, _ = rf.loglikelihood(ctx, " 1")
         ll_2, _ = rf.loglikelihood(ctx, " 2")
@@ -70,14 +69,12 @@ class CaseHold(Task):
         return ll_0, ll_1, ll_2, ll_3, ll_4
 
     def process_results(self, doc, results):
-        print(f"Processing the results: {results}")
         gold = doc["label"]
         pred = np.argmax(results)
-        print(f"Prediction: {pred}")
-        return {"acc": pred == gold}
+        return {"acc": pred == gold, "f1_micro": (gold, pred), "f1_macro": (gold, pred)}
 
     def higher_is_better(self):
-        return {"acc": True}
+        return {"acc": True, "f1_micro": True, "f1_macro": True}
 
     def aggregation(self):
-        return {"acc": mean}
+        return {"acc": mean, "f1_micro": f1_micro, "f1_macro": f1_macro}
