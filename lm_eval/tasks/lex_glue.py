@@ -29,10 +29,9 @@ class CaseHold(Task):
     VERSION = 0
     DATASET_PATH = "lex_glue"
     DATASET_NAME = "case_hold"
-    NUM_CHOICES = 5
 
     def has_training_docs(self):
-        return True
+        return False
 
     def has_validation_docs(self):
         return True
@@ -62,8 +61,7 @@ class CaseHold(Task):
         return " {}".format(doc["endings"][doc["label"]])
 
     def construct_requests(self, doc, ctx):
-        endings = doc["endings"]
-        lls = [rf.loglikelihood(ctx, " {}".format(endings[choice])) for choice in range(self.NUM_CHOICES)]
+        lls = [rf.loglikelihood(ctx, " {}".format(choice)) for choice in doc["endings"]]
         return lls
 
     def process_results(self, doc, results):
@@ -106,7 +104,7 @@ class SCOTUS(Task):
             return self.dataset["test"]
 
     def doc_to_text(self, doc):
-        return "Given the following opinion from the Supreme Court of USA (SCOTUS):\n{}\nThe relevant issue area is:".format(
+        return "Given the following opinion from the Supreme Court of USA (SCOTUS):\n\"{}\"\nThe relevant issue area is:".format(
             doc["text"]
         )
 
