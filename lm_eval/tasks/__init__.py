@@ -107,6 +107,7 @@ TASK_REGISTRY = {
     # LexGLUE
     "case_hold": lex_glue.CaseHold,
     "scotus": lex_glue.SCOTUS,
+    "unfair_tos": lex_glue.UNFAIR_ToS,
     # SuperGLUE
     "boolq": superglue.BoolQ,
     "cb": superglue.CommitmentBank,

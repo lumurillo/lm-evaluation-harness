@@ -49,14 +49,14 @@ def f1_micro(items):
     unzipped_list = list(zip(*items))
     golds = unzipped_list[0]
     preds = unzipped_list[1]
-    return sklearn.metrics.f1_score(golds, preds, average='micro')
+    return sklearn.metrics.f1_score(golds, preds, average='micro', zero_division=0)
 
 
 def f1_macro(items):
     unzipped_list = list(zip(*items))
     golds = unzipped_list[0]
     preds = unzipped_list[1]
-    return sklearn.metrics.f1_score(golds, preds, average='macro')
+    return sklearn.metrics.f1_score(golds, preds, average='macro', zero_division=0)
 
 
 def acc_all(items):
