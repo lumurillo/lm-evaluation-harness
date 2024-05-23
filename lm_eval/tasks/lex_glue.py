@@ -74,6 +74,7 @@ class CaseHold(Task):
         return lls
 
     def process_results(self, doc, results):
+        results = [result[0] for result in results]
         gold = doc["label"]
         pred = np.argmax(results)
         return {"acc": pred == gold, "f1_micro": (gold, pred), "f1_macro": (gold, pred)}
